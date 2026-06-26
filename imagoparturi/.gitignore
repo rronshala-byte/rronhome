@@ -30,3 +30,6 @@ yarn-error.log*
 # vercel / typescript
 .vercel
 *.tsbuildinfo
+
+# local editor / preview tooling
+/.claude/

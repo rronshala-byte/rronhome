@@ -53,15 +53,27 @@ present, it auto-switches to the real database + real emails — no code change.
 | Production DB schema | `supabase/schema.sql` |
 | Env var reference | `.env.example` |
 
-Design tokens: ink `#0c0c0d`, paper `#fafafa`, accent red `#d6202f`; fonts Outfit
-(display) + Inter (body). Vibe: **clean, minimal, a bit youthful.**
+Design tokens (**redesigned 2026-06-26 — monochrome, no colour**): ink `#1a1916`
+(+ `ink-soft #33312c`), paper `#f5f3ef` (+ `paper-warm #ebe8e1` for alternating
+sections), pure white for cards. **No accent / no red anywhere.** Fonts:
+**Cormorant Garamond** (display serif, used at light weights) + **Inter** (body).
+Vibe: **monochrome, Scandinavian minimal, classic serif, centered layout, big
+images.** The barber explicitly rejected the old red + bold-Outfit + "vibecoded"
+look. Keep it calm, editorial, and centered.
 
 ## Decisions already made (don't redo)
 
 - Price list taken from the shop wall photo. **"Fade / Skin fade" was removed.**
   **"Hiusten värjäys" price = "Sovitaan erikseen"** (negotiable).
-- Shop details from Google Maps: Tynnyritie 1, 02230 Espoo · 044 248 1592 ·
-  5,0 ★ (16 reviews) · imagoparturi.fi.
+- Shop details (from imagoparturi.fi): **Tynnyritie 1 B, 02230 Espoo · 050 326 6664** ·
+  5,0 ★ (16 reviews) · imagoparturi.fi. **Miesten parturi.** The business actually has
+  TWO locations (also Espoonaukio 5, 045 150 3095), but **the demo is single-location
+  (Tynnyritie 1 B)** per Rron. Tynnyritie is "ilman ajanvarausta" on the live site —
+  this project adds the online booking it lacks.
+- **Reviews carousel:** a native scrollable Google-style widget (no plugin) lives in
+  `Reviews.tsx`, fed by `reviews` in `lib/shop.ts`. Those review entries are
+  **PLACEHOLDERS** (like the photos) — replace with the real Google reviews, or wire
+  the Google Places API. Real detail used on the page: the shop's tyytyväisyystakuu.
 - **Opening hours are a placeholder** (Google only showed "Closes 20.00") — marked as
   alustava on the site. Replace with real hours in `lib/shop.ts`.
 - **Photos are placeholders**, clearly marked. To swap: drop files in `public/images/`

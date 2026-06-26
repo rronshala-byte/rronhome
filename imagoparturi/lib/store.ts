@@ -25,26 +25,41 @@ async function getSupabase() {
 }
 
 // ── Local file backend ────────────────────────────────────────
+// Locally this persists to a JSON file. On a read-only / ephemeral
+// serverless filesystem (e.g. Vercel) the file write fails, so we
+// keep an in-memory copy as the source of truth for the instance —
+// the booking flow still works for a demo. Add Supabase for real,
+// shared persistence in production.
 const DATA_FILE = path.join(process.cwd(), "data", "reservations.json");
 const SEED_FILE = path.join(process.cwd(), "data", "seed.json");
 
+let memoryRows: Reservation[] | null = null;
+
 async function readFileStore(): Promise<Reservation[]> {
+  if (memoryRows) return memoryRows;
   // Live data first; fall back to committed demo seed so the
   // dashboard shows example bookings on a fresh checkout.
   for (const file of [DATA_FILE, SEED_FILE]) {
     try {
       const raw = await fs.readFile(file, "utf-8");
-      return JSON.parse(raw) as Reservation[];
+      memoryRows = JSON.parse(raw) as Reservation[];
+      return memoryRows;
     } catch {
       /* try next */
     }
   }
-  return [];
+  memoryRows = [];
+  return memoryRows;
 }
 
 async function writeFileStore(rows: Reservation[]): Promise<void> {
-  await fs.mkdir(path.dirname(DATA_FILE), { recursive: true });
-  await fs.writeFile(DATA_FILE, JSON.stringify(rows, null, 2), "utf-8");
+  memoryRows = rows; // source of truth for this instance
+  try {
+    await fs.mkdir(path.dirname(DATA_FILE), { recursive: true });
+    await fs.writeFile(DATA_FILE, JSON.stringify(rows, null, 2), "utf-8");
+  } catch {
+    // read-only filesystem (e.g. Vercel) — memory holds it instead
+  }
 }
 
 // ── Public API ────────────────────────────────────────────────

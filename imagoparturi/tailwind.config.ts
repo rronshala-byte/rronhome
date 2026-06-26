@@ -8,19 +8,25 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        ink: "#0c0c0d",
-        paper: "#fafafa",
-        accent: {
-          DEFAULT: "#d6202f", // refined barber red
-          soft: "#fff1f1",
+        // Warm monochrome palette — no colour, Scandinavian minimal.
+        ink: {
+          DEFAULT: "#1a1916", // warm near-black (text)
+          soft: "#33312c", // softer dark surface
+        },
+        paper: {
+          DEFAULT: "#f5f3ef", // warm off-white (page)
+          warm: "#ebe8e1", // slightly deeper for alternating sections
         },
       },
       fontFamily: {
-        display: ["var(--font-display)", "system-ui", "sans-serif"],
+        display: ["var(--font-display)", "Georgia", "serif"],
         body: ["var(--font-body)", "system-ui", "sans-serif"],
       },
       maxWidth: {
-        content: "1120px",
+        content: "1180px",
+      },
+      letterSpacing: {
+        label: "0.22em",
       },
     },
   },

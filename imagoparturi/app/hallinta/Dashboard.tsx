@@ -59,12 +59,12 @@ export default function Dashboard({
       <header className="border-b border-ink/10 bg-white">
         <div className="mx-auto flex max-w-5xl items-center justify-between px-5 py-4 sm:px-8">
           <div>
-            <p className="font-display text-xl font-extrabold tracking-tight">
-              Imago<span className="text-accent">Parturi</span>
+            <p className="font-display text-xl uppercase tracking-[0.18em]">
+              Imago Parturi
             </p>
             <p className="text-xs text-ink/50">Varaushallinta</p>
           </div>
-          <button onClick={logout} className="text-sm font-medium text-ink/60 hover:text-accent">
+          <button onClick={logout} className="text-sm font-medium text-ink/60 hover:text-ink">
             Kirjaudu ulos
           </button>
         </div>
@@ -81,7 +81,7 @@ export default function Dashboard({
 
         <div className="mb-8 grid grid-cols-3 gap-3">
           <Stat label="Varauksia" value={stats.total} />
-          <Stat label="Odottaa" value={stats.pending} accent />
+          <Stat label="Odottaa" value={stats.pending} />
           <Stat label="Tänään" value={stats.today} />
         </div>
 
@@ -110,9 +110,9 @@ export default function Dashboard({
                       <span className="font-medium text-ink">{r.customer_name}</span> · {r.service_name}
                     </p>
                     <p className="mt-0.5 text-sm text-ink/55">
-                      <a href={`tel:${r.customer_phone}`} className="hover:text-accent">{r.customer_phone}</a>
+                      <a href={`tel:${r.customer_phone}`} className="hover:text-ink">{r.customer_phone}</a>
                       {" · "}
-                      <a href={`mailto:${r.customer_email}`} className="hover:text-accent">{r.customer_email}</a>
+                      <a href={`mailto:${r.customer_email}`} className="hover:text-ink">{r.customer_email}</a>
                     </p>
                     {r.notes && <p className="mt-1 text-sm text-ink/45">”{r.notes}”</p>}
                   </div>
@@ -131,7 +131,7 @@ export default function Dashboard({
                       <button
                         disabled={busy === r.id}
                         onClick={() => setStatus(r.id, "cancelled")}
-                        className="rounded-full border border-ink/15 px-3.5 py-2 text-xs font-semibold text-ink/70 transition hover:border-accent hover:text-accent disabled:opacity-50"
+                        className="rounded-full border border-ink/15 px-3.5 py-2 text-xs font-semibold text-ink/70 transition hover:border-ink disabled:opacity-50"
                       >
                         Peru
                       </button>
@@ -147,10 +147,10 @@ export default function Dashboard({
   );
 }
 
-function Stat({ label, value, accent }: { label: string; value: number; accent?: boolean }) {
+function Stat({ label, value }: { label: string; value: number }) {
   return (
     <div className="rounded-2xl border border-ink/10 bg-white p-4 text-center sm:p-5">
-      <p className={`font-display text-3xl font-extrabold ${accent ? "text-accent" : "text-ink"}`}>{value}</p>
+      <p className="font-display text-3xl text-ink">{value}</p>
       <p className="mt-1 text-xs font-medium uppercase tracking-wider text-ink/45">{label}</p>
     </div>
   );

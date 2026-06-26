@@ -1,35 +1,35 @@
 import { services } from "@/lib/shop";
+import Reveal from "./Reveal";
 
 export default function Services() {
   return (
-    <section id="palvelut" className="mx-auto max-w-content px-5 py-20 sm:px-8 md:py-28">
-      <div className="mb-12 max-w-xl">
-        <p className="section-label">Hinnasto</p>
-        <h2 className="mt-3 font-display text-4xl font-extrabold tracking-tight sm:text-5xl">
-          Palvelut & hinnat
-        </h2>
-        <p className="mt-4 text-ink/60">
-          Selkeät hinnat, ei yllätyksiä. Valitse palvelu varauksen yhteydessä.
-        </p>
-      </div>
+    <section id="palvelut" className="bg-paper">
+      <div className="mx-auto max-w-content px-5 py-24 text-center sm:px-8 md:py-32">
+        <Reveal>
+          <p className="section-label">Hinnasto</p>
+          <h2 className="mt-5 font-display text-4xl font-normal sm:text-5xl md:text-6xl">
+            Palvelut ja hinnat
+          </h2>
+          <p className="mx-auto mt-5 max-w-md leading-relaxed text-ink/55">
+            Selkeät hinnat, ei yllätyksiä. Valitset palvelun varauksen yhteydessä.
+          </p>
+        </Reveal>
 
-      <div className="grid gap-x-12 gap-y-1 md:grid-cols-2">
-        {services.map((s) => (
-          <div
-            key={s.id}
-            className="flex items-baseline justify-between gap-4 border-b border-ink/10 py-4"
-          >
-            <div>
-              <span className="font-medium text-ink">{s.name}</span>
-              {s.note && (
-                <span className="block text-xs text-ink/45">{s.note}</span>
-              )}
-            </div>
-            <span className="whitespace-nowrap font-display text-lg font-bold text-accent">
-              {s.price}
-            </span>
-          </div>
-        ))}
+        <Reveal>
+          <ul className="mx-auto mt-14 max-w-md">
+            {services.map((s) => (
+              <li key={s.id} className="border-t border-ink/10 py-6 first:border-t-0">
+                <p className="font-display text-2xl leading-snug">{s.name}</p>
+                {s.note && (
+                  <p className="mt-1.5 text-xs leading-relaxed text-ink/40">{s.note}</p>
+                )}
+                <p className="mt-2.5 text-sm font-medium uppercase tracking-[0.12em] text-ink/55">
+                  {s.price}
+                </p>
+              </li>
+            ))}
+          </ul>
+        </Reveal>
       </div>
     </section>
   );

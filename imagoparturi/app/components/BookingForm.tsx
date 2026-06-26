@@ -42,21 +42,17 @@ export default function BookingForm() {
 
   if (state === "success") {
     return (
-      <div className="rounded-3xl border border-accent/20 bg-accent-soft p-10 text-center">
-        <div className="mx-auto mb-4 flex h-14 w-14 items-center justify-center rounded-full bg-accent text-white">
+      <div className="border border-ink/12 bg-white p-10 text-center">
+        <div className="mx-auto mb-5 flex h-14 w-14 items-center justify-center rounded-full bg-ink text-paper">
           <svg width="26" height="26" viewBox="0 0 24 24" fill="none" aria-hidden>
-            <path d="M5 13l4 4L19 7" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" />
+            <path d="M5 13l4 4L19 7" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" />
           </svg>
         </div>
-        <h3 className="font-display text-2xl font-bold">Varaus vastaanotettu!</h3>
+        <h3 className="font-display text-3xl">Varaus vastaanotettu</h3>
         <p className="mx-auto mt-2 max-w-sm text-ink/60">
-          Lähetimme vahvistuksen sähköpostiisi. Nähdään pian!
+          Lähetimme vahvistuksen sähköpostiisi. Nähdään pian.
         </p>
-        <button
-          onClick={() => setState("idle")}
-          className="btn-ghost mt-6"
-          type="button"
-        >
+        <button onClick={() => setState("idle")} className="btn-ghost mt-7" type="button">
           Tee uusi varaus
         </button>
       </div>
@@ -64,10 +60,7 @@ export default function BookingForm() {
   }
 
   return (
-    <form
-      onSubmit={onSubmit}
-      className="rounded-3xl border border-ink/10 bg-white p-6 shadow-sm sm:p-8"
-    >
+    <form onSubmit={onSubmit} className="border border-ink/12 bg-white p-6 sm:p-8">
       <div className="grid gap-4 sm:grid-cols-2">
         <div className="sm:col-span-2">
           <label className="label" htmlFor="customer_name">Nimi</label>
@@ -118,7 +111,7 @@ export default function BookingForm() {
       </div>
 
       {state === "error" && (
-        <p className="mt-4 rounded-lg bg-accent-soft px-4 py-3 text-sm text-accent">{error}</p>
+        <p className="mt-4 border border-ink/20 bg-paper-warm px-4 py-3 text-sm text-ink">{error}</p>
       )}
 
       <button type="submit" disabled={state === "submitting"} className="btn-primary mt-6 w-full disabled:opacity-60">

@@ -3,7 +3,7 @@
 @tailwind utilities;
 
 :root {
-  --font-display: "Outfit", system-ui, -apple-system, sans-serif;
+  --font-display: "Cormorant Garamond", Georgia, "Times New Roman", serif;
   --font-body: "Inter", system-ui, -apple-system, sans-serif;
 }
 
@@ -12,40 +12,75 @@ html {
 }
 
 body {
-  background: #fafafa;
-  color: #0c0c0d;
+  background: #f5f3ef;
+  color: #1a1916;
   font-family: var(--font-body);
   -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
 }
 
 @layer components {
+  /* Monochrome, editorial. Buttons are crisp, not big trendy pills. */
   .btn-primary {
-    @apply inline-flex items-center justify-center gap-2 rounded-full bg-accent px-7 py-3.5
-           text-sm font-semibold text-white transition
-           hover:bg-[#b81b28] active:scale-[0.98];
+    @apply inline-flex items-center justify-center gap-2 rounded-sm bg-ink px-8 py-3.5
+           text-[13px] font-medium uppercase tracking-[0.14em] text-paper transition
+           hover:bg-ink-soft active:scale-[0.99];
   }
   .btn-ghost {
-    @apply inline-flex items-center justify-center gap-2 rounded-full border border-ink/15 px-7 py-3.5
-           text-sm font-semibold text-ink transition hover:border-ink/40 hover:bg-ink/[0.03];
+    @apply inline-flex items-center justify-center gap-2 rounded-sm border border-ink/25 px-8 py-3.5
+           text-[13px] font-medium uppercase tracking-[0.14em] text-ink transition
+           hover:border-ink hover:bg-ink/[0.03];
   }
   .section-label {
-    @apply text-xs font-semibold uppercase tracking-[0.18em] text-accent;
+    @apply text-[11px] font-medium uppercase tracking-label text-ink/45;
   }
   .field {
-    @apply w-full rounded-xl border border-ink/15 bg-white px-4 py-3 text-sm text-ink
+    @apply w-full rounded-sm border border-ink/20 bg-white px-4 py-3 text-sm text-ink
            outline-none transition placeholder:text-ink/35
-           focus:border-accent focus:ring-2 focus:ring-accent/15;
+           focus:border-ink focus:ring-1 focus:ring-ink/20;
   }
   .label {
-    @apply mb-1.5 block text-sm font-medium text-ink/70;
+    @apply mb-1.5 block text-[11px] font-medium uppercase tracking-[0.12em] text-ink/55;
   }
 }
 
-/* subtle entrance animation */
+/* hero load-in */
 @keyframes fadeUp {
   from { opacity: 0; transform: translateY(14px); }
   to { opacity: 1; transform: translateY(0); }
 }
 .fade-up {
-  animation: fadeUp 0.6s ease both;
+  animation: fadeUp 0.8s ease both;
+}
+
+/* scroll-reveal — toggled by the <Reveal> component via IntersectionObserver */
+.reveal {
+  opacity: 0;
+  transform: translateY(18px);
+  transition: opacity 0.8s ease, transform 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+  will-change: opacity, transform;
+}
+.reveal-in {
+  opacity: 1;
+  transform: none;
+}
+
+/* horizontal reviews scroller — hide scrollbar, keep scroll */
+.no-scrollbar {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .reveal,
+  .fade-up {
+    opacity: 1 !important;
+    transform: none !important;
+    animation: none !important;
+    transition: none !important;
+  }
+  html { scroll-behavior: auto; }
 }

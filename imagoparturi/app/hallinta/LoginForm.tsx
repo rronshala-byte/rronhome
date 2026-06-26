@@ -30,8 +30,8 @@ export default function LoginForm() {
   return (
     <div className="flex min-h-screen items-center justify-center bg-paper px-5">
       <form onSubmit={onSubmit} className="w-full max-w-sm rounded-3xl border border-ink/10 bg-white p-8 shadow-sm">
-        <p className="font-display text-2xl font-extrabold tracking-tight">
-          Imago<span className="text-accent">Parturi</span>
+        <p className="font-display text-2xl uppercase tracking-[0.2em]">
+          Imago Parturi
         </p>
         <p className="mt-1 text-sm text-ink/55">Varaushallinta</p>
 
@@ -45,7 +45,7 @@ export default function LoginForm() {
           autoFocus
           placeholder="••••••••"
         />
-        {error && <p className="mt-3 text-sm text-accent">{error}</p>}
+        {error && <p className="mt-3 text-sm text-ink/70">{error}</p>}
         <button type="submit" disabled={loading} className="btn-primary mt-5 w-full disabled:opacity-60">
           {loading ? "Kirjaudutaan…" : "Kirjaudu sisään"}
         </button>
