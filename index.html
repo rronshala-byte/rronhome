@@ -1,0 +1,585 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Rron Shala</title>
+  <meta name="description" content="Short-form and marketing. Kosovar, based in Finland. Work watched over 300 million times." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,400;1,500&family=DM+Sans:wght@400;500&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #f4f1ea;
+      --ink: #14130f;
+      --dim: #6a675d;
+      --faint: #b6b2a6;
+      --line: #d8d3c6;
+      --serif: 'Cormorant Garamond', Georgia, serif;
+      --sans: 'DM Sans', system-ui, sans-serif;
+    }
+
+    html { -webkit-font-smoothing: antialiased; text-rendering: optimizeLegibility; }
+
+    body {
+      background: var(--bg);
+      color: var(--ink);
+      font-family: var(--serif);
+      overflow-x: hidden;
+    }
+
+    /* grain */
+    .grain {
+      position: fixed;
+      inset: 0;
+      z-index: 9998;
+      pointer-events: none;
+      opacity: 0.05;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 240 240' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+    }
+
+    .label {
+      font-family: var(--sans);
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--dim);
+    }
+
+    section { position: relative; }
+
+    .wrap {
+      width: 100%;
+      max-width: 1180px;
+      margin: 0 auto;
+      padding: 0 40px;
+    }
+
+    /* line/word reveal mechanics */
+    .rvl { display: inline-block; overflow: hidden; vertical-align: top; }
+    .rvl > span { display: inline-block; will-change: transform; }
+
+    /* ---------- HERO ---------- */
+    .hero {
+      min-height: 100vh;
+      min-height: 100svh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 0 40px;
+    }
+    .hero-top {
+      position: absolute;
+      top: 34px; left: 0; right: 0;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .hero-name {
+      font-weight: 500;
+      font-size: clamp(64px, 15.5vw, 240px);
+      line-height: 0.9;
+      letter-spacing: -0.02em;
+    }
+    .hero-sub {
+      font-weight: 400;
+      font-size: clamp(18px, 2.4vw, 30px);
+      color: var(--dim);
+      margin-top: 26px;
+      max-width: 620px;
+      line-height: 1.45;
+    }
+    .hero-cue {
+      position: absolute;
+      bottom: 30px; left: 0; right: 0;
+      display: flex;
+      justify-content: center;
+    }
+    .hero-cue span {
+      font-family: var(--sans);
+      font-size: 10px;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: var(--faint);
+      animation: bob 2.4s ease-in-out infinite;
+    }
+    @keyframes bob { 0%,100% { transform: translateY(0); opacity: .5 } 50% { transform: translateY(6px); opacity: 1 } }
+
+    /* ---------- INTRO ---------- */
+    .intro { padding: 34vh 0 30vh; }
+    .intro p {
+      font-weight: 400;
+      font-size: clamp(30px, 5vw, 74px);
+      line-height: 1.14;
+      letter-spacing: -0.01em;
+      max-width: 15ch;
+    }
+    .intro em { font-style: italic; color: var(--dim); }
+
+    /* ---------- STAT ---------- */
+    .stat {
+      height: 100vh;
+      height: 100svh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+    }
+    .stat-num {
+      font-weight: 500;
+      font-variant-numeric: tabular-nums;
+      font-size: clamp(52px, 13vw, 200px);
+      line-height: 0.95;
+      letter-spacing: -0.03em;
+    }
+    .stat-cap {
+      font-weight: 400;
+      font-style: italic;
+      font-size: clamp(18px, 2.6vw, 30px);
+      color: var(--dim);
+      margin-top: 18px;
+    }
+
+    /* ---------- FOCUS ---------- */
+    .focus { padding: 22vh 0; }
+    .focus .label { margin-bottom: 44px; }
+    .focus-row {
+      display: block;
+      font-weight: 400;
+      font-size: clamp(42px, 9vw, 132px);
+      line-height: 1.02;
+      letter-spacing: -0.02em;
+      border-top: 1px solid var(--line);
+      padding: 22px 0;
+    }
+    .focus-row:last-child { border-bottom: 1px solid var(--line); }
+    .focus-row .idx {
+      font-family: var(--sans);
+      font-size: 13px;
+      font-weight: 500;
+      letter-spacing: 0.1em;
+      color: var(--faint);
+      vertical-align: super;
+      margin-right: 18px;
+    }
+
+    /* ---------- TRACK (horizontal) ---------- */
+    .track { height: 100vh; height: 100svh; overflow: hidden; }
+    .track-sticky {
+      height: 100vh; height: 100svh;
+      display: flex;
+      align-items: center;
+      will-change: transform;
+    }
+    .track-inner {
+      display: flex;
+      align-items: center;
+      gap: 8vw;
+      padding: 0 8vw;
+      white-space: nowrap;
+    }
+    .track-lead {
+      font-family: var(--sans);
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--dim);
+      writing-mode: vertical-rl;
+    }
+    .track-phrase {
+      font-weight: 400;
+      font-size: clamp(38px, 7vw, 104px);
+      line-height: 1.06;
+      letter-spacing: -0.015em;
+      white-space: normal;
+      width: min(60vw, 900px);
+    }
+    .track-phrase em { font-style: italic; color: var(--dim); }
+
+    /* ---------- KOSOVO ---------- */
+    .kosovo {
+      padding: 26vh 0;
+      overflow: hidden;
+    }
+    .kosovo .label { margin-bottom: 40px; }
+    .kosovo p {
+      font-weight: 400;
+      font-size: clamp(32px, 5.4vw, 82px);
+      line-height: 1.12;
+      letter-spacing: -0.015em;
+      max-width: 18ch;
+    }
+    .kosovo .big { font-style: italic; }
+
+    /* ---------- ECOM ---------- */
+    .ecom { padding: 20vh 0; }
+    .ecom p {
+      font-weight: 400;
+      font-size: clamp(30px, 5vw, 74px);
+      line-height: 1.14;
+      letter-spacing: -0.01em;
+      max-width: 16ch;
+    }
+
+    /* ---------- CONTACT ---------- */
+    .contact {
+      min-height: 100vh;
+      min-height: 100svh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      position: relative;
+      overflow: hidden;
+    }
+    .marquee {
+      position: absolute;
+      top: 50%;
+      left: 0;
+      transform: translateY(-50%);
+      width: 100%;
+      pointer-events: none;
+      opacity: 0.05;
+      white-space: nowrap;
+      font-size: clamp(120px, 22vw, 340px);
+      font-weight: 500;
+      letter-spacing: -0.02em;
+      will-change: transform;
+    }
+    .contact-inner { position: relative; z-index: 1; }
+    .contact h2 {
+      font-weight: 400;
+      font-size: clamp(38px, 7vw, 110px);
+      line-height: 1.02;
+      letter-spacing: -0.02em;
+    }
+    .contact-email {
+      display: inline-block;
+      margin-top: 40px;
+      font-weight: 500;
+      font-size: clamp(28px, 5vw, 62px);
+      color: var(--ink);
+      text-decoration: none;
+      letter-spacing: -0.01em;
+      position: relative;
+    }
+    .contact-email::after {
+      content: '';
+      position: absolute;
+      left: 0; bottom: 6px;
+      width: 100%; height: 2px;
+      background: var(--ink);
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform 0.5s cubic-bezier(.19,1,.22,1);
+    }
+    .contact-email:hover::after { transform: scaleX(1); }
+    .socials {
+      margin-top: 60px;
+      display: flex;
+      gap: 34px;
+      flex-wrap: wrap;
+    }
+    .socials a {
+      font-family: var(--sans);
+      font-size: 13px;
+      font-weight: 500;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--dim);
+      text-decoration: none;
+      padding-bottom: 4px;
+      border-bottom: 1px solid transparent;
+      transition: color .25s, border-color .25s;
+    }
+    .socials a:hover { color: var(--ink); border-color: var(--ink); }
+    .foot {
+      position: absolute;
+      bottom: 28px; left: 0; right: 0;
+    }
+    .foot .wrap { display: flex; justify-content: space-between; }
+    .foot span { font-family: var(--sans); font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--faint); }
+
+    @media (max-width: 720px) {
+      .wrap, .hero, .contact-inner-pad { padding-left: 24px; padding-right: 24px; }
+      .hero { padding: 0 24px; }
+      .hero-top { padding: 0 24px; }
+      .hero-sub { margin-top: 20px; }
+      .intro p, .ecom p, .kosovo p { max-width: none; }
+      .socials { gap: 22px; }
+    }
+
+    /* ---- reveal system (CSS transitions, no JS ticker dependency) ---- */
+    [data-fade] { opacity: 0; transform: translateY(26px); transition: opacity 1s ease, transform 1s cubic-bezier(.16,1,.3,1); }
+    [data-fade].in { opacity: 1; transform: none; }
+
+    [data-row] { opacity: 0; transform: translateY(58px); transition: opacity 1s ease, transform 1.1s cubic-bezier(.16,1,.3,1); }
+    [data-row].in { opacity: 1; transform: none; }
+
+    [data-split] .rvl > span { transform: translateY(112%); transition: transform 1s cubic-bezier(.16,1,.3,1); transition-delay: var(--d, 0ms); }
+    [data-split].in .rvl > span { transform: translateY(0); }
+
+    .hero-sub, .hero-top .label { opacity: 0; transform: translateY(16px); transition: opacity .9s ease, transform .9s cubic-bezier(.16,1,.3,1); }
+    .hero-top .label { transform: translateY(-10px); }
+    .hero-cue span { opacity: 0; }
+    body.loaded .hero-sub, body.loaded .hero-top .label { opacity: 1; transform: none; }
+    body.loaded .hero-sub { transition-delay: .45s; }
+    body.loaded .hero-cue span { animation: bob 2.4s ease-in-out infinite .9s; }
+
+    /* fallback when GSAP is unavailable: unclip the horizontal track */
+    body.nogsap .track { height: auto; }
+    body.nogsap .track-sticky { height: auto; display: block; }
+    body.nogsap .track-inner { flex-direction: column; white-space: normal; padding: 14vh 8vw; gap: 6vh; }
+    body.nogsap .track-lead { writing-mode: horizontal-tb; }
+    body.nogsap .track-phrase { width: min(90vw, 900px); }
+
+    /* reduced motion: everything visible, no transforms */
+    @media (prefers-reduced-motion: reduce) {
+      .rvl > span, [data-fade], [data-row] { transform: none !important; opacity: 1 !important; }
+      [data-split] .rvl > span { transform: none !important; }
+      .hero-cue span { animation: none; opacity: 1; }
+    }
+  </style>
+</head>
+<body>
+  <div class="grain" aria-hidden="true"></div>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-top wrap">
+      <span class="label">Rron Shala</span>
+      <span class="label">Est. Prishtina / Helsinki</span>
+    </div>
+    <h1 class="hero-name" data-split="chars">Rron Shala</h1>
+    <p class="hero-sub">Short-form and marketing. Kosovar, based in Finland.</p>
+    <div class="hero-cue"><span>Scroll</span></div>
+  </section>
+
+  <!-- INTRO -->
+  <section class="intro">
+    <div class="wrap">
+      <p data-split="words">I make short-form video, and I know how to make it move. Over the past few years the work I've put out has been watched more than <em>300 million times</em>.</p>
+    </div>
+  </section>
+
+  <!-- STAT -->
+  <section class="stat">
+    <div class="stat-num" id="counter" data-target="300000000">0</div>
+    <div class="stat-cap">views on the work I've made</div>
+  </section>
+
+  <!-- FOCUS -->
+  <section class="focus">
+    <div class="wrap">
+      <div class="label" data-fade>What I do</div>
+      <div class="focus-row" data-row><span class="idx">01</span>Short-form video</div>
+      <div class="focus-row" data-row><span class="idx">02</span>Marketing</div>
+      <div class="focus-row" data-row><span class="idx">03</span>Brand building</div>
+      <div class="focus-row" data-row><span class="idx">04</span>E-commerce</div>
+    </div>
+  </section>
+
+  <!-- TRACK (horizontal) -->
+  <section class="track" id="track">
+    <div class="track-sticky" id="trackSticky">
+      <div class="track-inner">
+        <span class="track-lead">Track record</span>
+        <p class="track-phrase">I work with brands all over the world, <em>including the US</em>.</p>
+        <p class="track-phrase">I've built with public figures in Finland and America who have <em>hundreds of thousands of followers</em>.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- KOSOVO -->
+  <section class="kosovo">
+    <div class="wrap">
+      <div class="label" data-fade>Prishtina project</div>
+      <p data-split="words">In Kosovo I run a project with a creator who has <span class="big">400,000 followers</span>. We've pulled in hundreds of millions of views together, and I'm the one who lines up the collaborations.</p>
+    </div>
+  </section>
+
+  <!-- ECOM -->
+  <section class="ecom">
+    <div class="wrap">
+      <p data-split="words">I also build and run my own e-commerce brands.</p>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section class="contact">
+    <div class="marquee" id="marquee" aria-hidden="true">Get in touch — Get in touch — Get in touch — </div>
+    <div class="wrap contact-inner">
+      <h2 data-fade>Working on something serious?</h2>
+      <a class="contact-email" href="mailto:rronbiz@outlook.com" data-fade>rronbiz@outlook.com</a>
+      <div class="socials" data-fade>
+        <a href="https://www.tiktok.com/@rron.shala" target="_blank" rel="noopener">TikTok</a>
+        <a href="https://www.instagram.com/rronshala_/" target="_blank" rel="noopener">Instagram</a>
+        <a href="https://www.linkedin.com/in/rron-shala-59513b307" target="_blank" rel="noopener">LinkedIn</a>
+      </div>
+    </div>
+    <div class="foot">
+      <div class="wrap">
+        <span>Rron Shala</span>
+        <span>&copy; 2026</span>
+      </div>
+    </div>
+  </section>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@studio-freight/lenis@1.0.42/dist/lenis.min.js"></script>
+  <script>
+  (function () {
+    var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    /* ---- text splitting: wraps each char/word so it can slide up under a
+       clipped mask. A per-item --d custom property drives the CSS stagger. ---- */
+    function splitChars(el) {
+      var text = el.textContent;
+      el.textContent = '';
+      var frag = document.createDocumentFragment(), n = 0;
+      for (var i = 0; i < text.length; i++) {
+        var ch = text[i];
+        if (ch === ' ') { frag.appendChild(document.createTextNode(' ')); continue; }
+        var w = document.createElement('span'); w.className = 'rvl';
+        var inner = document.createElement('span');
+        inner.textContent = ch;
+        inner.style.setProperty('--d', (n++ * 32) + 'ms');
+        w.appendChild(inner);
+        frag.appendChild(w);
+      }
+      el.appendChild(frag);
+    }
+
+    function splitWords(el) {
+      var n = 0;
+      function build(text) {
+        var parts = text.split(/(\s+)/), frag = document.createDocumentFragment();
+        parts.forEach(function (word) {
+          if (word === '') return;
+          if (/^\s+$/.test(word)) { frag.appendChild(document.createTextNode(' ')); return; }
+          var w = document.createElement('span'); w.className = 'rvl';
+          var inner = document.createElement('span');
+          inner.textContent = word;
+          inner.style.setProperty('--d', (n++ * 34) + 'ms');
+          w.appendChild(inner);
+          frag.appendChild(w);
+        });
+        return frag;
+      }
+      // walk child nodes so inline <em>/<span> keep their styling
+      var kids = Array.prototype.slice.call(el.childNodes);
+      el.textContent = '';
+      kids.forEach(function (node) {
+        if (node.nodeType === 3) {
+          el.appendChild(build(node.textContent));
+        } else {
+          var mark = document.createElement(node.tagName.toLowerCase());
+          mark.className = node.className || '';
+          mark.appendChild(build(node.textContent));
+          el.appendChild(mark);
+        }
+      });
+    }
+
+    document.querySelectorAll('[data-split="chars"]').forEach(splitChars);
+    document.querySelectorAll('[data-split="words"]').forEach(splitWords);
+
+    var revealEls = document.querySelectorAll('[data-split], [data-fade], [data-row]');
+
+    /* ---- reveal on view. Class-based, so it never depends on an animation
+       ticker running: if the tab is throttled the content still appears. ---- */
+    if (reduce || !('IntersectionObserver' in window)) {
+      revealEls.forEach(function (el) { el.classList.add('in'); });
+      document.body.classList.add('loaded');
+    } else {
+      var io = new IntersectionObserver(function (entries) {
+        entries.forEach(function (e) {
+          if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); }
+        });
+      }, { rootMargin: '0px 0px -10% 0px', threshold: 0.1 });
+      revealEls.forEach(function (el) { io.observe(el); });
+      requestAnimationFrame(function () {
+        requestAnimationFrame(function () { document.body.classList.add('loaded'); });
+      });
+    }
+
+    /* ---- STAT counter (plain rAF, no GSAP dependency) ---- */
+    var counter = document.getElementById('counter');
+    if (counter) {
+      var target = parseInt(counter.getAttribute('data-target'), 10);
+      var started = false;
+      function runCount() {
+        if (started) return; started = true;
+        if (reduce) { counter.textContent = target.toLocaleString('en-US') + '+'; return; }
+        var dur = 2200, t0 = null;
+        function step(ts) {
+          if (t0 === null) t0 = ts;
+          var p = Math.min((ts - t0) / dur, 1);
+          var eased = 1 - Math.pow(1 - p, 3);
+          counter.textContent = Math.round(target * eased).toLocaleString('en-US') + '+';
+          if (p < 1) requestAnimationFrame(step);
+        }
+        requestAnimationFrame(step);
+      }
+      if ('IntersectionObserver' in window && !reduce) {
+        var cio = new IntersectionObserver(function (entries) {
+          entries.forEach(function (e) { if (e.isIntersecting) { runCount(); cio.disconnect(); } });
+        }, { threshold: 0.4 });
+        cio.observe(document.querySelector('.stat'));
+      } else { runCount(); }
+    }
+
+    /* ---- GSAP scroll effects: pin, horizontal track, marquee. Optional.
+       If GSAP is missing or reduced motion is on, degrade gracefully. ---- */
+    var hasGsap = typeof window.gsap !== 'undefined';
+    if (!hasGsap || reduce) {
+      document.body.classList.add('nogsap');
+      return;
+    }
+    gsap.registerPlugin(ScrollTrigger);
+
+    if (typeof window.Lenis !== 'undefined') {
+      var lenis = new Lenis({ duration: 1.1, smoothWheel: true });
+      lenis.on('scroll', ScrollTrigger.update);
+      gsap.ticker.add(function (time) { lenis.raf(time * 1000); });
+      gsap.ticker.lagSmoothing(0);
+    }
+
+    // stat pin for weight
+    ScrollTrigger.create({ trigger: '.stat', start: 'top top', end: '+=60%', pin: true, pinSpacing: true });
+
+    // horizontal track
+    var sticky = document.getElementById('trackSticky');
+    if (sticky) {
+      var dist = sticky.scrollWidth - window.innerWidth;
+      if (dist > 0) {
+        gsap.to(sticky, {
+          x: -dist, ease: 'none',
+          scrollTrigger: {
+            trigger: '#track', start: 'top top',
+            end: function () { return '+=' + (dist + window.innerHeight * 0.4); },
+            scrub: 0.6, pin: true, invalidateOnRefresh: true
+          }
+        });
+      }
+    }
+
+    // contact marquee drift
+    var mq = document.getElementById('marquee');
+    if (mq) {
+      gsap.to(mq, {
+        xPercent: -30, ease: 'none',
+        scrollTrigger: { trigger: '.contact', start: 'top bottom', end: 'bottom top', scrub: 1 }
+      });
+    }
+
+    window.addEventListener('load', function () { ScrollTrigger.refresh(); });
+  })();
+  </script>
+</body>
+</html>
